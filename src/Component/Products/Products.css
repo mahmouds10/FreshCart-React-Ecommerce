@@ -1,0 +1,13 @@
+.pagination {
+    user-select: none;
+  }
+  .pagination a{
+      color: var(--main-color) !important;
+  }
+  .pagination li:hover {
+    cursor: pointer !important;
+  }
+  .befor-price{
+    text-decoration: line-through;
+    
+  }

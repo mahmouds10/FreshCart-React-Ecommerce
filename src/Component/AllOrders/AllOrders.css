@@ -1,0 +1,21 @@
+.order{
+    border: 1px solid #00000077;
+    border-radius: 8px;
+    transition: all 0.5s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.order:hover{
+    box-shadow: var(--shadow);
+    transform: scale(1.02);
+}
+.order-layer {
+  position: absolute;
+  background-color: #0aad0a;
+  width: 100%;
+  bottom: -100%;
+  left: 0;
+  transition: all 0.5s;
+}
+.order:hover .order-layer {
+  bottom: 0;
+}

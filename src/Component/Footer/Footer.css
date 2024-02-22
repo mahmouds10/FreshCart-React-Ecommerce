@@ -1,0 +1,8 @@
+.footer{
+    background-color: #f0f3f2;
+}
+@media screen and (min-width: 998px) {
+    .smalled-txt {
+        font-size: 20px !important;
+    }
+}

@@ -1,19 +1,42 @@
 {
   "name": "the_final_project",
   "version": "0.1.0",
+  "homepage": "https://mahmouds10.github.io/FreshCart-React-Ecommerce",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "^10.4.17",
+    "axios": "^1.6.7",
+    "bootstrap": "^5.3.2",
+    "formik": "^2.4.5",
+    "install": "^0.13.0",
+    "jquery": "^3.7.1",
+    "npm": "^10.4.0",
+    "postcss": "^8.4.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-headroom": "^3.2.1",
+    "react-hot-toast": "^2.4.1",
+    "react-loader-spinner": "^6.1.6",
+    "react-owl-carousel": "^2.3.3",
+    "react-payment-logos": "^1.1.0",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.22.0",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.10.5",
+    "tailwindcss": "^3.4.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -34,5 +57,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
   }
 }
