@@ -29,6 +29,7 @@ const myRouter = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: localStorage.getItem("tkn")?<Home/> : <Register /> },
+      { path: "FreshCart-React-Ecommerce/", element: localStorage.getItem("tkn")?<Home/> : <Register /> },
       { path: "Register", element: <Register /> },
       { path: "Login", element: <Login /> },
       {
