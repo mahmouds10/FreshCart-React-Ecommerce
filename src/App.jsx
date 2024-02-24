@@ -1,6 +1,10 @@
 import "./App.css";
 import Layout from "./Component/Layout/Layout";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createHashRouter,
+} from "react-router-dom";
 import Register from "./Component/Register/Register";
 import Login from "./Component/Login/Login";
 import Products from "./Component/Products/Products";
@@ -19,17 +23,23 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import ProductDetails from "./Component/ProductDetails/ProductDetails";
 import CartContextProvider from "./Contexts/CartContext";
 import { Toaster } from "react-hot-toast";
-import WishList from './Component/WishList/WishList';
-import Payment from './Component/Payment/Payment';
-import AllOrders from './Component/AllOrders/AllOrders';
 
-const myRouter = createBrowserRouter([
+import Payment from "./Component/Payment/Payment";
+import AllOrders from "./Component/AllOrders/AllOrders";
+
+const myRouter = createHashRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { path: "/", element: localStorage.getItem("tkn")?<Home/> : <Register /> },
-      { path: "FreshCart-React-Ecommerce/", element: localStorage.getItem("tkn")?<Home/> : <Register /> },
+      {
+        path: "/",
+        element: localStorage.getItem("tkn") ? <Home /> : <Register />,
+      },
+      {
+        path: "FreshCart-React-Ecommerce/",
+        element: localStorage.getItem("tkn") ? <Home /> : <Register />,
+      },
       { path: "Register", element: <Register /> },
       { path: "Login", element: <Login /> },
       {
@@ -64,14 +74,7 @@ const myRouter = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      {
-        path: "wishlist",
-        element: (
-          <ProtectedRoute>
-            <WishList />
-          </ProtectedRoute>
-        ),
-      },
+
       {
         path: "Brands",
         element: (

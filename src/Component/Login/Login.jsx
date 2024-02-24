@@ -6,11 +6,12 @@ import Swal from "sweetalert2";
 import { ThreeCircles } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "./../../Contexts/Authentication";
+import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
   const [isloading, setIsloading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const { setToken } = useContext(authContext);
+  const { setToken , setuserID } = useContext(authContext);
 
   // Validate Mail
   function checkMail() {
@@ -62,6 +63,7 @@ export default function Login() {
       .then((res) => {
         setIsloading(false);
         localStorage.setItem("tkn", res.data.token);
+        localStorage.setItem("userId", jwtDecode(res.data.token).id);
         setToken(res.data.token);
         Swal.fire({
           title: "Authentication completed",

@@ -29,8 +29,9 @@ export default function Navbar() {
       if (result.isConfirmed) {
         setToken(null);
         localStorage.removeItem("tkn");
+        localStorage.removeItem("userId");
         Swal.fire({
-          title: "Loggedout",
+          title: "Logged out",
           text: "See You Soon!",
           icon: "success",
         }).then(() => {
@@ -90,6 +91,14 @@ export default function Navbar() {
                       to="/cart"
                     >
                       Cart
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link d-flex align-items-center"
+                      to="/brands"
+                    >
+                      Brands
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -155,7 +164,7 @@ export default function Navbar() {
                       >
                         {numOfCartItems ? (
                           <span
-                            style={{ fontSize: "8px", top: "-4px"  }}
+                            style={{ fontSize: "8px", top: "-4px" }}
                             className="position-absolute  d-flex align-items-center start-100 translate-middle badge bg-main  rounded-pill bg-danger"
                           >
                             {numOfCartItems}
@@ -198,4 +207,5 @@ export default function Navbar() {
       </>
     </Headroom>
   );
+  console.log("🚀 ~ Navbar ~ token:", token);
 }

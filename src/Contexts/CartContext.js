@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import React, { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 import { authContext } from "./Authentication";
-import Swal from "sweetalert2";
+
 export const cartContxt = createContext();
 export default function CartContextProvider({ children }) {
   const [numOfCartItems, setNumOfCartItems] = useState(0);

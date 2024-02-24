@@ -9,7 +9,8 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export default function Payment() {
-  const [loading, setLoading] = useState(false)
+  const [cashLoading, setcashLoading] = useState(false);
+  const [visaLoading, setvisaLoading] = useState(false);
   const orderFormik = useFormik({
     validateOnMount: "true",
     initialValues: {
@@ -68,7 +69,6 @@ export default function Payment() {
         document.getElementById("phone").classList.remove("invalid");
         document.getElementById("phone").classList.add("valid");
       }
-      console.log(errors);
       return errors;
     },
 
@@ -76,43 +76,62 @@ export default function Payment() {
       shippingAddress.city = shippingAddress.city.trim();
       shippingAddress.phone = shippingAddress.phone.trim();
       shippingAddress.details = shippingAddress.details.trim();
-      
     },
   });
 
   useEffect(() => {
-    document.title = "Check Out"
-  },[])
-  const backToHome = useNavigate()
+    document.title = "Check Out";
+  }, []);
+  const backToHome = useNavigate();
 
-  const { cartId , setTotalCartPrice , setNumOfCartItems , setAllProducts } = useContext(cartContxt);
+  const { cartId, setTotalCartPrice, setNumOfCartItems, setAllProducts } =
+    useContext(cartContxt);
   async function createCashOrder(values) {
-    setLoading(true);
-    await axios.post(
-      `https://ecommerce.routemisr.com/api/v1/orders/${cartId}`,
-      values ,
-      {
+    setcashLoading(true);
+    await axios
+      .post(`https://ecommerce.routemisr.com/api/v1/orders/${cartId}`, values, {
         headers: {
           token: localStorage.getItem("tkn"),
         },
-      }
-    ).then((res) =>{
-      console.log(res);
-      setLoading(false)
-      toast.success("Order placed successfully")
-      setAllProducts([]);
+      })
+      .then((res) => {
+        console.log(res);
+        setcashLoading(false);
+        toast.success("Order placed successfully");
+        setAllProducts([]);
         setNumOfCartItems(0);
         setTotalCartPrice(0);
-        setTimeout(()=>{
-          backToHome("/home")
-        },2000)
-    }).catch(() => {
-      setLoading(false)
-      toast.error("Error while creating order")      
-      setTimeout(()=>{
-        backToHome("/home")
-      },2000)
-    })
+        setTimeout(() => {
+          backToHome("/home");
+        }, 2000);
+      })
+      .catch(() => {
+        setcashLoading(false);
+        toast.error("Error while creating order");
+        setTimeout(() => {
+          backToHome("/allorders");
+        }, 2000);
+      });
+  }
+  async function createVisaOrder(values) {
+    setvisaLoading(true);
+    await axios
+      .post(
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`,
+        values,
+        {
+          headers: { token: localStorage.getItem("tkn") },
+        }
+      )
+      .then((res) => {
+        console.log(".then ~ res:", res);
+        window.open(res.data.session.url);
+        setvisaLoading(false);
+      })
+      .catch((err) => {
+        setvisaLoading(false);
+        console.log(".catch ~ err:", err);
+      });
   }
   return (
     <>
@@ -182,22 +201,60 @@ export default function Payment() {
                   value={orderFormik.values.shippingAddress.details}
                 />
               </div>
-              <button
-                id="order-btn"
-                type="submit"
-                onClick={()=>{
-                  createCashOrder(orderFormik.values)
-                }}
-                className={`
-                  ${orderFormik.isValid ? " bg-main " : " invvvalid-btm " } +
-                  ${!loading ? " justify-content-between " : "  justify-content-center"}
-                  + btn text-white my-2 d-flex align-items-center`}
-              >
-                  {
-                    loading? <ThreeCircles width={30} height={30} color="#fff"/> : <>
-                    <i className="fa-solid fa-dollar"></i> Confirm cash order</>
+              <div className="d-flex align-items-center flex-column col-md-12  justify-content-evenly">
+                <div className="col-lg-12 d-flex  justify-content-center">
+                  <button
+                  style={{width: "192.125px" , height: "37.7778px"}}
+                    id="order-btn"
+                    type="submit"
+                    onClick={() => {
+                      createCashOrder(orderFormik.values);
+                    }}
+                    className={`
+                  ${orderFormik.isValid ? " bg-main " : " invvvalid-btm "} +
+                  ${
+                    !cashLoading
+                      ? " justify-content-between "
+                      : "  justify-content-center"
                   }
-              </button>
+                  + btn text-white my-2 d-flex align-items-center`}
+                  >
+                    {cashLoading ? (
+                      <ThreeCircles width={30} height={30} color="#fff" />
+                    ) : (
+                      <>
+                        <i className="fa-solid fa-dollar"></i> Confirm cash
+                        order
+                      </>
+                    )}
+                  </button>
+                </div>
+                <div className="col-lg-12 d-flex justify-content-center">
+                  <button
+                    id="order-cc-btn"
+                    onClick={() => {
+                      createVisaOrder(orderFormik.values);
+                    }}
+                    className={`
+                  ${orderFormik.isValid ? " bg-main " : " invvvalid-btm "} +
+                  ${
+                    !visaLoading
+                      ? " justify-content-between "
+                      : "  justify-content-center"
+                  }
+                  + btn text-white my-2 d-flex align-items-center`}
+                  >
+                    {visaLoading ? (
+                      <ThreeCircles width={30} height={30} color="#fff" />
+                    ) : (
+                      <>
+                        <i className="fa-solid fa-dollar"></i> Confirm credit
+                        order
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
             </form>
           </div>
         </div>

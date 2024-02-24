@@ -1,0 +1,8 @@
+.inner-brand {
+  border: 1px solid var(--main-color);
+  transition: all 0.5s;
+  border-radius: 20px;
+}
+.inner-brand:hover {
+  transform: scale(1.01);
+}
