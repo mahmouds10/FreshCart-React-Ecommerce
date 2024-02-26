@@ -46,7 +46,7 @@ export default function Navbar() {
       <>
         <nav className="navbar position-sticky top-0 z-2 navbar-expand-lg bg-body-tertiary">
           <div className="container-fluid">
-            <Link className="navbar-brand" to="#">
+            <Link className="navbar-brand" to="/home">
               <img src={logo} alt="Fresh Cart" />
             </Link>
             <button

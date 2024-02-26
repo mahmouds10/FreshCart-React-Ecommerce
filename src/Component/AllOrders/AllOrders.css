@@ -19,3 +19,12 @@
 .order:hover .order-layer {
   bottom: 0;
 }
+.accordion-button:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.accordion-button:not(.collapsed) {
+  color: var(--main-color) !important;
+  background-color: transparent !important;
+}
