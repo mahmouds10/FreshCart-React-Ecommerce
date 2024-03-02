@@ -46,7 +46,7 @@ export default function Navbar() {
       <>
         <nav className="navbar position-sticky top-0 z-2 navbar-expand-lg bg-body-tertiary">
           <div className="container-fluid">
-            <Link className="navbar-brand" to="/home">
+            <Link className="navbar-brand" to={token? "/home" : "/register"}>
               <img src={logo} alt="Fresh Cart" />
             </Link>
             <button
@@ -153,28 +153,32 @@ export default function Navbar() {
                       <i className="fa-brands fa-github"></i>
                     </a>
                   </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link d-flex align-items-center"
-                      to="/cart"
-                    >
-                      <i
-                        style={{ fontSize: "20px" }}
-                        className="fa-solid h6 mb-0 fa-cart-shopping position-relative"
+                  {token ? (
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link d-flex align-items-center"
+                        to="/cart"
                       >
-                        {numOfCartItems ? (
-                          <span
-                            style={{ fontSize: "8px", top: "-4px" }}
-                            className="position-absolute  d-flex align-items-center start-100 translate-middle badge bg-main  rounded-pill bg-danger"
-                          >
-                            {numOfCartItems}
-                          </span>
-                        ) : (
-                          <></>
-                        )}
-                      </i>
-                    </NavLink>
-                  </li>
+                        <i
+                          style={{ fontSize: "20px" }}
+                          className="fa-solid h6 mb-0 fa-cart-shopping position-relative"
+                        >
+                          {numOfCartItems ? (
+                            <span
+                              style={{ fontSize: "8px", top: "-4px" }}
+                              className="position-absolute  d-flex align-items-center start-100 translate-middle badge bg-main  rounded-pill bg-danger"
+                            >
+                              {numOfCartItems}
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                        </i>
+                      </NavLink>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                 </ul>
                 {!token ? (
                   <>
@@ -207,5 +211,4 @@ export default function Navbar() {
       </>
     </Headroom>
   );
-  console.log("🚀 ~ Navbar ~ token:", token);
 }

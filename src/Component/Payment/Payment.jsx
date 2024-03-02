@@ -124,7 +124,6 @@ export default function Payment() {
         }
       )
       .then((res) => {
-        console.log(".then ~ res:", res);
         window.open(res.data.session.url);
         setvisaLoading(false);
       })
@@ -204,7 +203,7 @@ export default function Payment() {
               <div className="d-flex align-items-center flex-column col-md-12  justify-content-evenly">
                 <div className="col-lg-12 d-flex  justify-content-center">
                   <button
-                  style={{width: "192.125px" , height: "37.7778px"}}
+                    style={{ width: "192.125px", height: "37.7778px" }}
                     id="order-btn"
                     type="submit"
                     onClick={() => {
